@@ -1,0 +1,174 @@
+<!-- ! rồi tab -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamEdu</title>
+    <link rel="icon" href="./assets/img/Icon/icon.jpg" type="image/png">
+    <link rel="stylesheet" href="./assets/fonts-icon/themify-icons-font/themify-icons/themify-icons.css">
+<!-- icon -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="side-icon active">🏠</div>
+        <div class="side-icon">🏆</div>
+        <div class="side-icon">👜</div>
+        <div class="side-icon">#</div>
+        <div class="side-icon">🎮</div>
+        <div class="side-icon">✋</div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="header js-header">
+            <div class="header-text">
+                ⛅️DreamEdu mang giấc mơ học tập đến mọi người🌈
+            </div>
+            <div class="header-icons">
+                <div class="header-music js-header-music">
+                    <i class="ti-music-alt"></i>
+                </div>
+                <audio id="bg-music" src="./assets/music/Bầu Trời Mới.mp3" loop></audio>
+                <i class="header-bell ti-bell"></i>
+                <i class="header-search ti-search"></i>
+            </div>
+
+
+        </header>
+
+        <!-- BANNER -->
+        <section class="banner">
+            <h1>Chào mừng bé 🌟</h1>
+            <p>Bé ơi, đăng nhập để học tập và kiếm thật nhiều điểm số may mắn nha!</p>
+            <img src="./assets/img/Icon/mây2.png" class="move-lr2">
+        </section>
+        <img src="./assets/img/Icon/mây.png" class="move-lr1">
+         
+        
+
+
+        <!-- CARDS -->
+        <section class="cards">
+
+            <div class="card">
+                <div class="card-icon">🏆</div>
+                <h3>Bảng Vàng</h3>
+                <p>Xem điểm số và huy hiệu.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🏪</div>
+                <h3>Cửa Hàng</h3>
+                <p>Dùng điểm đổi quà.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🧮</div>
+                <h3>Học chữ số</h3>
+                <p>Làm quen, ghép số, đếm hình.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎮</div>
+                <h3>Trò chơi</h3>
+                <p>Giải trí sau giờ học.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3>AI Thử tài giơ tay</h3>
+                <p>Học cùng trí tuệ nhân tạo.</p>
+            </div>
+        
+        </section>
+        <img src="./assets/img/Icon/khinhkhicau.png" alt="" class="move-kkc">
+        <div class="modal js-modal">
+            <div id="effect-layer"></div>
+        </div>
+
+        <!-- FOOTER BUTTON -->
+      
+    </main>
+
+    
+    <script>
+      const music = document.querySelector('.header-music');
+      if (music) {
+        music.addEventListener('click', () => {
+          music.classList.toggle('active'); // bật/tắt trạng thái giữ
+        });
+      }
+    </script>
+    <script>
+        const icons = ["🌈", "✨", "🍀","💧"];
+        const layer = document.getElementById("effect-layer");
+
+        function createItem() {
+            const item = document.createElement("span");
+            item.className = "falling-item";
+            item.innerText = icons[Math.floor(Math.random() * icons.length)];
+
+            item.style.left = Math.random() * 100 + "vw";
+            item.style.fontSize = 20 + Math.random() * 20 + "px";
+            item.style.animationDuration = 6 + Math.random() * 5 + "s";
+
+            layer.appendChild(item);
+
+            setTimeout(() => item.remove(), 11000);
+        }
+
+        setInterval(createItem, 500);
+    </script>
+    <script>
+        const elementAdd = document.querySelector('.js-modal');
+        const effectMusic = document.querySelector('.js-header-music');
+        let effectOn = false
+        function addopen(){
+            if (!effectOn) {
+                elementAdd.classList.add('open');
+                effectOn = true;
+            }else{
+                elementAdd.classList.remove('open');
+                effectOn = false;
+            }
+        }
+        effectMusic.addEventListener('click', addopen);  
+
+    </script>
+    <script>
+        const musicBtn = document.querySelector('.js-header-music');
+        const bgMusic = document.getElementById('bg-music');
+
+        let isMusicOn = false;
+        function musicon (){
+            if (!bgMusic || !musicBtn) return;
+            if(!isMusicOn){
+                // play may be blocked by browser autoplay policies; handle promise
+                bgMusic.play().catch(err => console.warn('bg-music play prevented:', err));
+                isMusicOn = true;
+                musicBtn.classList.add('active');
+            }else{
+                bgMusic.pause();
+                isMusicOn = false;
+                musicBtn.classList.remove('active');
+
+            }
+        }
+
+        if (musicBtn) musicBtn.addEventListener('click', musicon);
+    </script>
+
+
+
+ 
+
+</body>
+</html>
